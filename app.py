@@ -26,11 +26,11 @@ build_scatter = st.checkbox('construir grafico de dispersion')
 
 if build_histogram:
     st.write('histograma para el conjunto de datos de anuncios de ventas de coches')
-    fig = px.scatter(df_ventas_vehiculos, x='odometro')
+    fig = px.scatter(df_ventas_vehiculos, x='odometer')
     st.plotly_chart(fig, use_container_width=True)
 
 if build_scatter:
     st.write(
         'creacion grafico de dispersion para el conjunto de datos de anuncios de ventas de coches')
-    fig = px.scatter(df_ventas_vehiculos, x='odometro', y='price')
+    fig = px.scatter(df_ventas_vehiculos, x='odometer', y='price')
     st.plotly_chart(fig, use_container_width=True)
