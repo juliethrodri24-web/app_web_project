@@ -19,3 +19,18 @@ if scatter_button:
         'creacxion de grafico de dispersion:  Precio vs. Odometro')
     fig = px.scatter(df_ventas_vehiculos, x='odometer', y='price')
     st.plotly_chart(fig, use_container_width=True)
+
+# creo casillas de verificacion
+build_histogram = st.checkbox('construir histograma')
+build_scatter = st.checkbox('construir grafico de dispersion')
+
+if build_histogram:
+    st.write('histograma para el conjunto de datos de anuncios de ventas de coches')
+    fig = px.scatter(df_ventas_vehiculos, x='odometro')
+    st.plotly_chart(fig, use_container_width=True)
+
+if build_scatter:
+    st.write(
+        'creacion grafico de dispersion para el conjunto de datos de anuncios de ventas de coches')
+    fig = px.scatter(df_ventas_vehiculos, x='odometro', y='price')
+    st.plotly_chart(fig, use_container_width=True)
