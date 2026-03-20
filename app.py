@@ -44,4 +44,3 @@ if build_scatter:
                              title="kilometraje frente a precio de venta",
                              labels={'odometer': 'kilometraje', 'price': 'precio($)'})
     st.plotly_chart(fig_scatter, use_container_with=True)
-    print(ig_scatter)
