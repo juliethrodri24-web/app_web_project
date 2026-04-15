@@ -2,45 +2,47 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-df_ventas_vehiculos = pd.read_csv('vehicles_us.csv')
-hist_button = st.button('contruccion histograma')
+df_vehicle_sales = pd.read_csv('vehicles_us.csv')
+hist_button = st.button('histogram construction')
 
 if hist_button:  # al hacer clkic el boton
     # escribe un mensaje
-    st.write('creacion histograma para la columna de odometro del DF ventas vehiculos')
+    st.write(
+        'Creating a histogram for the odometer column of vehicle sales in Mexico City')
     # crear un histogramna
-    fig = px.histogram(df_ventas_vehiculos, x="odometer")
+    fig = px.histogram(df_vehicle_sales, x="odometer")
     st.plotly_chart(fig, use_container_width=True)
 # creo nuevo boton que al hacer clic crea un grafico de dispersion
-scatter_button = st.button('construir grafico de dispersion ')
+scatter_button = st.button('construct a scatter plot')
+
 
 if scatter_button:
     st.write(
-        'creacxion de grafico de dispersion:  Precio vs. Odometro')
-    fig = px.scatter(df_ventas_vehiculos, x='odometer', y='price')
-    st.plotly_chart(fig, use_container_width=True)
+        'creating a scatter plot:  Price vs. Odometer')
+    fig = px.scatter(df_vehicle_sales, x='odometer', y='price')
+    st.plotly_chart(fig, use_container_width=True, theme="streamlit")
 
 
-st.header('Analisis exploratorio de datos de vehiculos')
+st.header('Exploratory analysis of vehicle data')
 col1, col2 = st.columns(2)
 
 with col1:
-    build_histogram = st.checkbox('construir histograma')
+    build_histogram = st.checkbox('construct histogram')
 with col2:
-    build_scatter = st.checkbox('construir grafico de dispersion')
+    build_scatter = st.checkbox('construct scatter plot')
 
 if build_histogram:
-    st.subheader('Distribucion del kilometraje (odometer)')
+    st.subheader('Mileage distribution (odometer)')
     # agrego etiquetas mas claras
-    fig_hist = px.histogram(df_ventas_vehiculos, x='odometer',
-                            title="Frecuencia del kilometraje",
-                            labels={'odometer': 'kilometraje'})
-    st.plotly_chart(fig_hist, use_container_with=True)
+    fig_hist = px.histogram(df_vehicle_sales, x='odometer',
+                            title="Mileage frequency",
+                            labels={'odometer': 'mileage (km)'})
+    st.plotly_chart(fig_hist, use_container_width=True)
 
 if build_scatter:
-    st.subheader('Relacion: Kilometraje vs. Precio')
+    st.subheader('Relationship: Mileage vs. Price')
     # agrego etiquetas mas claras
-    fig_scatter = px.scatter(df_ventas_vehiculos, x='odometer', y='price',
-                             title="kilometraje frente a precio de venta",
-                             labels={'odometer': 'kilometraje', 'price': 'precio($)'})
-    st.plotly_chart(fig_scatter, use_container_with=True)
+    fig_scatter = px.scatter(df_vehicle_sales, x='odometer', y='price',
+                             title="mileage versus sale price",
+                             labels={'odometer': 'mileage (km)', 'price': 'sale price ($)'})
+    st.plotly_chart(fig_scatter, use_container_width=True, theme="streamlit")
