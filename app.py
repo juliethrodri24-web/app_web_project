@@ -10,15 +10,20 @@ st.set_page_config(page_title="Vehicle Analyzer", layout="wide")
 
 @st.cache_data
 def load_and_clean_data():
-    df = pd.read_csv('vehicles_us.csv')
+    try:
+        df = pd.read_csv('vehicles_us.csv')
 
-    # Null treatment
-    df['odometer'] = df['odometer'].fillna(df['odometer'].median())
-    df['model_year'] = df['model_year'].fillna(0).astype(int)
+        # Limpieza básica
+        df['odometer'] = df['odometer'].fillna(df['odometer'].median())
+        df['model_year'] = df['model_year'].fillna(0).astype(int)
+        df['brand'] = df['model'].apply(
+            lambda x: str(x).split()[0].capitalize())
 
-    # Feature Engineering: Extract brand
-    df['brand'] = df['model'].apply(lambda x: str(x).split()[0].capitalize())
-    return df
+        return df
+    except FileNotFoundError:
+        st.error(
+            "¡Ups! No encontré el archivo 'vehicles_us.csv'. Revisa si el nombre está bien escrito.")
+        return None
 
 
 df = load_and_clean_data()
