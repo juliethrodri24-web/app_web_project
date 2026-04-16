@@ -33,10 +33,10 @@ selected_brands = st.sidebar.multiselect(
 )
 
 # 4. Data filtering
-df_filtered = df[df['brand'].isin(selected_brands)]
 
+df_filtered = df[df['brand'].isin(selected_brands)]
 # Special DataFrame for time-dependent visualizations (avoids year 0)
-df_visualizacion = df_filtered[df_filtered['model_year'] > 0]
+df_visualization = df_filtered[df_filtered['model_year'] > 0]
 
 # 5. Main header
 st.title('Exploratory Analysis of Vehicle Data')
